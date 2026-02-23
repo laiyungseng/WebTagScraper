@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag Scraper Hub</title>
+    <!-- Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="background-mesh"></div>
+    
+    <main class="container">
+        <header class="hero">
+            <h1>Tag Scraper <span class="gradient-text">Pro</span></h1>
+            <p>Extract meta &lt;robots&gt; and target links instantly.</p>
+        </header>
+
+        <section class="glass-panel main-panel">
+            <nav class="tabs">
+                <button class="tab-btn active" data-tab="single" aria-label="Single URL Form">
+                    <i class="fa-solid fa-link"></i> Single URL
+                </button>
+                <button class="tab-btn" data-tab="excel" aria-label="Excel Upload Form">
+                    <i class="fa-solid fa-file-excel"></i> Excel Upload
+                </button>
+                <button class="tab-btn" data-tab="sheet" aria-label="Google Sheet Link Form">
+                    <i class="fa-brands fa-google-drive"></i> Google Sheet
+                </button>
+            </nav>
+
+            <div class="tab-content">
+                <!-- SINGLE URL FORM -->
+                <div class="form-container active" id="single-tab">
+                    <h2>Scrape a Single URL</h2>
+                    <p class="subtitle">Quickly extract data from one URL to see if it links to your target.</p>
+                    
+                    <form id="single-form">
+                        <div class="input-group">
+                            <label for="published_url">Published URL</label>
+                            <input type="url" id="published_url" placeholder="https://example.com/blog..." required>
+                        </div>
+                        <div class="input-group">
+                            <label for="target_url">Target URL</label>
+                            <input type="url" id="target_url" placeholder="https://yourdomain.com...">
+                        </div>
+                        <button type="submit" class="btn primary-btn" id="single-btn">
+                            <span>Scrape Now</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                    <div id="single-result" class="result-box hidden"></div>
+                </div>
+
+                <!-- EXCEL UPLOAD FORM -->
+                <div class="form-container" id="excel-tab">
+                    <h2>Batch Scrape via Excel</h2>
+                    <p class="subtitle">Upload an `.xlsx` file containing a list of URLs.</p>
+                    
+                    <div class="format-placeholder">
+                        <p><strong>Required Format:</strong> Ensure your Excel sheet has the following columns (case-insensitive):</p>
+                        <table class="mock-table">
+                            <thead>
+                                <tr><th>published_url</th><th>target_url</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>https://site1.com/post</td><td>https://my-target.com</td></tr>
+                                <tr><td>https://site2.com/article</td><td>https://my-target.com</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <form id="excel-form">
+                        <div class="file-drop-area" id="drop-area">
+                            <i class="fa-solid fa-cloud-arrow-up drop-icon"></i>
+                            <span class="file-message">Drag & drop your Excel file here or <span class="highlight">browse</span></span>
+                            <input class="file-input" type="file" id="excel_file" accept=".xlsx, .xls" required>
+                        </div>
+                        <button type="submit" class="btn primary-btn action-btn">
+                            <span>Process File</span>
+                            <i class="fa-solid fa-gears"></i>
+                        </button>
+                    </form>
+                    <div id="excel-status" class="status-box hidden"></div>
+                </div>
+
+                <!-- GOOGLE SHEET FORM -->
+                <div class="form-container" id="sheet-tab">
+                    <h2>Connect Google Sheet</h2>
+                    <p class="subtitle">Directly load tasks from a public Google Sheet without downloading files.</p>
+                    
+                    <div class="format-placeholder info">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <p>Make sure the Sheet sharing setting is set to <strong>"Anyone with the link can view"</strong>, and it contains <code>published_url</code> and <code>target_url</code> columns.</p>
+                    </div>
+
+                    <form id="sheet-form">
+                        <div class="input-group">
+                            <label for="sheet_url">Google Sheet URL</label>
+                            <input type="url" id="sheet_url" placeholder="https://docs.google.com/spreadsheets/d/..." required>
+                        </div>
+                        <button type="submit" class="btn primary-btn action-btn">
+                            <span>Fetch & Scrape</span>
+                            <i class="fa-solid fa-cloud-bolt"></i>
+                        </button>
+                    </form>
+                    <div id="sheet-status" class="status-box hidden"></div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loading-overlay">
+        <div class="spinner"></div>
+        <p id="loading-text">Processing your request...</p>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

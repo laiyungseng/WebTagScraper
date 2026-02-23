@@ -1,0 +1,388 @@
+/* ================== CSS VARIABLES ================== */
+:root {
+    /* Color Palette */
+    --clr-bg: hsl(230, 40%, 12%);
+    --clr-surface: hsla(230, 35%, 25%, 0.4);
+    --clr-surface-hover: hsla(230, 35%, 35%, 0.6);
+    --clr-border: hsla(0, 0%, 100%, 0.1);
+    
+    --clr-primary: hsl(210, 100%, 55%);
+    --clr-primary-glow: hsla(210, 100%, 55%, 0.5);
+    --clr-secondary: hsl(270, 80%, 65%);
+    
+    --clr-text: hsl(0, 0%, 95%);
+    --clr-text-muted: hsl(230, 15%, 75%);
+    
+    --clr-success: hsl(150, 70%, 45%);
+    --clr-error: hsl(350, 80%, 60%);
+
+    --font-main: 'Outfit', sans-serif;
+    --border-radius: 16px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ================== RESET ================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-main);
+}
+
+body {
+    background-color: var(--clr-bg);
+    color: var(--clr-text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    padding: 2rem 1rem;
+}
+
+/* ================== DYNAMIC BACKGROUND ================== */
+.background-mesh {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    background: 
+        radial-gradient(circle at 15% 50%, hsla(270, 80%, 40%, 0.3), transparent 40%),
+        radial-gradient(circle at 85% 30%, hsla(210, 100%, 40%, 0.25), transparent 40%);
+    animation: drift 15s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.05) translate(3%, 3%); }
+}
+
+/* ================== TYPOGRAPHY & HEADERS ================== */
+.container {
+    width: 100%;
+    max-width: 800px;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    color: var(--clr-text-muted);
+    font-size: 1.1rem;
+}
+
+/* ================== COMPONENTS ================== */
+.glass-panel {
+    background: var(--clr-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* TABS */
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    background: rgba(0,0,0,0.2);
+    padding: 0.5rem;
+    border-radius: 12px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--clr-text-muted);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.tab-btn:hover {
+    background: var(--clr-surface-hover);
+    color: var(--clr-text);
+}
+
+.tab-btn.active {
+    background: var(--clr-primary);
+    color: #fff;
+    box-shadow: 0 4px 15px var(--clr-primary-glow);
+}
+
+/* FORMS & INPUTS */
+.form-container {
+    display: none;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.form-container.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.subtitle {
+    color: var(--clr-text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: var(--clr-text-muted);
+    font-size: 0.9rem;
+    margin-left: 0.25rem;
+}
+
+input[type="url"], input[type="text"] {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--clr-border);
+    color: var(--clr-text);
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: var(--transition);
+    outline: none;
+}
+
+input[type="url"]:focus, input[type="text"]:focus {
+    border-color: var(--clr-primary);
+    background: rgba(0,0,0,0.3);
+    box-shadow: 0 0 10px hsla(210, 100%, 55%, 0.1);
+}
+
+input::placeholder {
+    color: rgba(255,255,255,0.2);
+}
+
+/* BUTTONS */
+.btn {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: var(--transition);
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+    color: white;
+    box-shadow: 0 4px 15px hsla(210, 100%, 55%, 0.3);
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px hsla(210, 100%, 55%, 0.4);
+}
+
+.primary-btn:active {
+    transform: translateY(1px);
+}
+
+/* PLACEHOLDERS & INFO BOXES */
+.format-placeholder {
+    background: rgba(0,0,0,0.15);
+    border: 1px solid var(--clr-border);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.format-placeholder.info {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.format-placeholder.info i {
+    color: var(--clr-secondary);
+    font-size: 1.5rem;
+    margin-top: 0.1rem;
+}
+
+.mock-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+
+.mock-table th, .mock-table td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.mock-table th {
+    color: var(--clr-primary);
+    font-weight: 600;
+}
+
+/* FILE DROP AREA */
+.file-drop-area {
+    border: 2px dashed var(--clr-border);
+    border-radius: 10px;
+    padding: 2.5rem 1rem;
+    text-align: center;
+    position: relative;
+    transition: var(--transition);
+    margin-bottom: 1.5rem;
+    background: rgba(0,0,0,0.1);
+}
+
+.file-drop-area.is-dragover {
+    border-color: var(--clr-primary);
+    background: hsla(210, 100%, 55%, 0.05);
+}
+
+.file-drop-area .drop-icon {
+    font-size: 3rem;
+    color: var(--clr-text-muted);
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.file-drop-area.is-dragover .drop-icon {
+    color: var(--clr-primary);
+    transform: translateY(-5px);
+}
+
+.file-input {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.highlight {
+    color: var(--clr-primary);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* RESULT BOXES */
+.result-box, .status-box {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--clr-border);
+    font-size: 0.95rem;
+    word-break: break-all;
+}
+
+.result-box.hidden, .status-box.hidden, .loading-overlay.hidden {
+    display: none;
+}
+
+.result-box.success {
+    border-color: var(--clr-success);
+    background: hsla(150, 70%, 45%, 0.05);
+}
+
+.result-box.error {
+    border-color: var(--clr-error);
+    background: hsla(350, 80%, 60%, 0.05);
+}
+
+/* PRE FORMAT FOR JSON */
+pre {
+    white-space: pre-wrap;
+    color: var(--clr-text-muted);
+}
+
+pre span.key { color: var(--clr-secondary); }
+pre span.string { color: var(--clr-success); }
+pre span.number { color: var(--clr-primary); }
+
+/* LOADING OVERLAY */
+.loading-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeInOverlay 0.3s forwards;
+}
+
+@keyframes fadeInOverlay {
+    to { opacity: 1; }
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(255,255,255,0.1);
+    border-radius: 50%;
+    border-top-color: var(--clr-primary);
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .tabs {
+        flex-direction: column;
+    }
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .glass-panel {
+        padding: 1.5rem;
+    }
+}
