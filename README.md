@@ -1,5 +1,4 @@
 # WebTagScraper
-
 A flexible web scraper developed in Python to extract specific tag information (`<meta name="robots">` and `<a href="target_url">`) based on a `published_url` and `target_url` provided via Excel. 
 
 ## Features
