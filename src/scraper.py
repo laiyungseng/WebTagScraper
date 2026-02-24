@@ -41,6 +41,7 @@ def scrape_url(published_url: str, target_url: str) -> Dict[str, Any]:
             for a_tag in target_links:
                 href = a_tag.get('href')
                 text = a_tag.get_text(strip=True)
+                rel = a_tag.get('rel')
                 
                 # Optionally get surrounding context by getting parent's text
                 parent_context = ""
@@ -51,6 +52,7 @@ def scrape_url(published_url: str, target_url: str) -> Dict[str, Any]:
                 
                 result["target_links_data"].append({
                     "href": href,
+                    "rel": rel,
                     "anchor_text": text,
                     "surrounding_context": parent_context
                 })

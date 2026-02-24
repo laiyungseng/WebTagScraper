@@ -1,0 +1,32 @@
+﻿diff --git a/app.py b/app.py
+index ee1430d..b702756 100644
+--- a/app.py
++++ b/app.py
+@@ -112,3 +112,6 @@ async def scrape_sheet(sheet_url: str = Form(...)):
+         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+         headers={"Content-Disposition": f"attachment; filename=scraped_results_sheet.xlsx"}
+     )
++if __name__== "__main__":
++    import uvicorn
++    uvicorn.run(app, host="127.0.0.1", port=5000)
+\ No newline at end of file
+diff --git a/src/scraper.py b/src/scraper.py
+index 5d2d821..620bc97 100644
+--- a/src/scraper.py
++++ b/src/scraper.py
+@@ -41,6 +41,7 @@ def scrape_url(published_url: str, target_url: str) -> Dict[str, Any]:
+             for a_tag in target_links:
+                 href = a_tag.get('href')
+                 text = a_tag.get_text(strip=True)
++                rel = a_tag.get('rel')
+                 
+                 # Optionally get surrounding context by getting parent's text
+                 parent_context = ""
+@@ -51,6 +52,7 @@ def scrape_url(published_url: str, target_url: str) -> Dict[str, Any]:
+                 
+                 result["target_links_data"].append({
+                     "href": href,
++                    "rel": rel,
+                     "anchor_text": text,
+                     "surrounding_context": parent_context
+                 })

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Web Tag Scraper"
+  short_description: "Extract robots and target link tags from pages"
+  default_prompt: "Use $web-tag-scraper to scrape published URLs for robots metadata and links to a target URL from my sheet."

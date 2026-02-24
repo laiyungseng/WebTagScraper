@@ -112,3 +112,6 @@ async def scrape_sheet(sheet_url: str = Form(...)):
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         headers={"Content-Disposition": f"attachment; filename=scraped_results_sheet.xlsx"}
     )
+if __name__== "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=5000)
